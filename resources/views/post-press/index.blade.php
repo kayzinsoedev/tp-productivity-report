@@ -14,7 +14,8 @@
 </div>
 <hr/>
 <div class="form-group col-md-12 main">
-{{ Form::open(array('url' => '')) }}
+<form method="post" action="{{ route('saveRecord') }}" >
+    {{csrf_field()}}
   <div class="container">
       <div class="form-row">
           <div class="form-group col-md-4">
@@ -23,7 +24,7 @@
           </div>
           <div class="form-group col-md-4">
             {{Form::label('day-night', 'Day Shift / Night Shift')}}
-            <select id="day-night" name="form_select" class="form-control" onchange="chooseShift()">
+            <select id="day-night" name="day_night" class="form-control" onchange="chooseShift()">
                <option value="">Choose--</option>
                <option value="day">Day Shift</option>
                <option value ="night">Night Shift</option>
@@ -70,7 +71,7 @@
               <input type="text" class="form-control" id="mr" name="night_mr" name="night_mr" placeholder=" M/R (Hrs)">
             </div>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="ave-mr" name="ave_mr" placeholder="AVE MR Hr(s)">
+              <input type="text" class="form-control" id="ave-mr" name="night_ave_mr" placeholder="AVE MR Hr(s)">
             </div>
           </div>
       </div>
@@ -159,16 +160,13 @@
                           <div class="form-group row">
                             <label for="from" class="col-sm-2 col-form-label">From</label>
                             <div class='col-sm-10 input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                                <input type="text" class="form-control" id="from_date" data-toggle="datetimepicker" data-target="#from_date" name="from_date" value="" placeholder="DD-MM-YYYY" required>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="to" class="col-sm-2 col-form-label">To</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputPassword" placeholder="">
+                             <div class='col-sm-10 input-group date' id='datetimepicker1'>
+                              <input type="text" class="form-control" id="to_date" data-toggle="datetimepicker" data-target="#to_date" name="to_date" value="" placeholder="DD-MM-YYYY" required>
                             </div>
                           </div>
                      </form>
@@ -192,6 +190,20 @@
 
 @section('js')
 <script type="text/javascript">
+    $(function () {
+          $('#from_date').datetimepicker({
+              useCurrent: false,
+              daysOfWeekDisabled: [0, 6],
+              format: "DD-MM-YYYY"
+          });
+
+          $('#to_date').datetimepicker({
+              useCurrent: false,
+              daysOfWeekDisabled: [0, 6],
+              format: "DD-MM-YYYY"
+          });
+      });
+
   // $('#datetimepicker1').datetimepicker();
   function chooseShift(){
       var e = document.getElementById("day-night");

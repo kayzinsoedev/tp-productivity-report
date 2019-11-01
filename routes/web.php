@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('post-press','Postpress\PostPressController@index')->name('post-press');
+    Route::post('post-press','Postpress\PostPressController@SaveRecord')->name('saveRecord');
 });
