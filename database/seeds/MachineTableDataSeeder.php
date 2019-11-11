@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Machine;
+use App\Postpress\Machine;
 
 class MachineTableDataSeeder extends Seeder
 {
